@@ -12,7 +12,6 @@ array = iris_train.values#
 np.random.seed(1377)
 np.random.shuffle(array)
 
-
 #独热编码
 def onehot(targets, num_out):
     onehot = np.zeros((num_out, targets.shape[0]))
@@ -33,13 +32,10 @@ def sigmoid(x):
     a = 1 / (1 + np.exp(-x))
     return a
 
-
-
-#函数
+#函数sigmoid()的导数
 def derived_sigmoid(x):
     return x * (1 - x)
     # return 1.0 - x ** 2
-
 
 #构造四层BP网络架构
 class BPNN:
@@ -79,7 +75,6 @@ class BPNN:
 
 
         # 信号正向传播
-
     def update(self, inputs):
         a=len(inputs)
         if len(inputs) != self.num_in - 1:
@@ -113,7 +108,6 @@ class BPNN:
 
         return self.active_out[:]
 
-
     # 误差反向传播
     def errorbackpropagate(self, targets, lr, m):  # lr是学习率， m是动量因子
         if len(targets) != self.num_out:
@@ -140,8 +134,6 @@ class BPNN:
             for j in range(self.num_hidden2):
                 error = error + hidden2_deltas[j] * self.wight_h1h2[i][j]
             hidden1_deltas[i] = derived_sigmoid(self.active_hidden1[i]) * error
-
-
 
         # 更新输出层权值
         for i in range(self.num_hidden2):
